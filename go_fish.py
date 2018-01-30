@@ -56,5 +56,26 @@ class Deck(object):
 				card = Card(suit,rank)
 				self.cards.append(card)
 
-	def function():
-		pass 
+
+class Hand():
+
+    def __init__(self, init_cards):
+        self.cards = init_cards
+
+    def add_card(self, card):
+        card_strs = [] 
+        for c in self.cards: 
+            card_strs.append(c.__str__()) 
+        if card.__str__() not in card_strs: 
+            self.cards.append(card) 
+
+    def remove_card(self, card):
+        x = [c.__str__() for c in self.cards]
+        card_hand = str(card)
+        if card_hand in x:
+            index = x.index(card_hand)
+            del self.cards[index]
+            return card 
+
+    def draw(self, deck):
+        self.add_card(deck.pop_card())
