@@ -55,3 +55,6 @@ class Deck(object):
 			for rank in range(1,14):
 				card = Card(suit,rank)
 				self.cards.append(card)
+
+	def function():
+		pass 
