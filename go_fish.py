@@ -25,17 +25,27 @@ class Hand():
 			card_strs.append(c.__str__())
 		if card.__str__() not in card_strs:
 			self.cards.append(card)
-	def remove_card(self, card):
-		card_string = []
-		for card in self.cards:
-			card_string.append(card.__str__())
-		new_card = str(card)
-		if new_card in card_string:
-			place = card_string.index(new_card)
-			del self.cards[place]
-			return card
+# 	def remove_card(self, card):
+# 		card_string = []
+# 		for card in self.cards:
+# 			card_string.append(card.__str__())
+# 		new_card = str(card)
+# 		if new_card in card_string:
+# 			place = card_string.index(new_card)
+# 			del self.cards[place]
+# 			return card
 	def draw(self, deck):
 		self.add_card(deck.pop_card())
+		
+	def remove_cards(self, card_rank= 1, hand = Hand()):
+		specific_card_count = 0
+		for card in self.cards:
+			if card.rank == card_rank:
+				specific_card_count += 1
+		self.cards = [x for x in self.cards if x.rank != card_rank]
+		for x in range(specific_card_count):
+			hand.cards.append(Card(0, card_rank))		
+		
 	def remove_pairs(self):
 		ranks = {}
 		for card in self.cards:
@@ -44,11 +54,7 @@ class Hand():
 			else:
 				ranks[card.rank] = [card]
 		final_cards = []
-		for rank in ranks.values():
-			card_to_remove = len(rank) % 2
-			if card_to_remove == 1:
-				final_cards.append(rank[-1])
-		self.cards = final_cards
+		
 
 
 class Deck(object):
