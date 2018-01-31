@@ -85,3 +85,15 @@ class Deck(object):
 			for cycle in range(num_cards):
 				hands[hand].add_card(self.pop_card())
 		return hands
+	
+d = Deck()
+print (
+h1 = d.deal()[0]
+h2 = d.deal()[1]
+	
+
+value_input = input("‘Please choose a card rank you would like to ask the other player if they have (between 1-13):")
+if value_input  h1.cards:
+	in
+	
+
