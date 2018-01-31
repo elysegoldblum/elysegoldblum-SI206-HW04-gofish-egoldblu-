@@ -35,13 +35,6 @@ class Deck(object):
 	def shuffle(self):
 		random.shuffle(self.cards)
 
-	def replace_card(self, card):
-		card_strs = [] 
-		for c in self.cards: 
-			card_strs.append(c.__str__()) 
-		if card.__str__() not in card_strs: 
-			self.cards.append(card) 
-
 	def sort_cards(self):
 		self.cards = []
 		for suit in range(4):
@@ -49,24 +42,19 @@ class Deck(object):
 				card = Card(suit,rank)
 				self.cards.append(card)
 				
-	def deal(self, num_hands, num_cards):
-		hands = []
+	def deal(self, num_hands=2, num_cards=7):
+		
+		h1 = Hand()
+		h2 = Hand()
+		hands = [h1, h2]
 		for hand in range(num_hands):
-			hands.append(Hand([]))
-		if num_cards == -1:
-			card_count = 0
-			while len(self.cards) != 0:
-				hands[card_count % num_hands].add_card(self.pop_card())
-				card_count += 1
-			return hands
-		for cycle in range(num_cards):
-			for hand in hands:
-				hand.add_card(self.pop_card())
+			for cycle in range(num_cards):
+				hands[hand].add_card(self.pop_card())
 		return hands
 
 
 class Hand():
-	def __init__(self,init_cards):
+	def __init__(self,init_cards=deck.deal(2,7):
 		self.cards = init_cards
 	def add_card(self, card):
 		card_strs = []
@@ -98,6 +86,4 @@ class Hand():
 			if card_to_remove == 1:
 				final_cards.append(rank[-1])
 		self.cards = final_cards
- 
-class Game():
-	
+
