@@ -87,3 +87,6 @@ class Hand():
 
     def draw(self, deck):
         self.add_card(deck.pop_card())
+ 
+class Game():
+	
