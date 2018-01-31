@@ -19,12 +19,15 @@ class Card(object):
 class Hand():
 	def __init__(self,init_cards):
 		self.cards = init_cards
-	def add_card(self, card):
-		card_strs = []
-		for c in self.cards:
-			card_strs.append(c.__str__())
-		if card.__str__() not in card_strs:
-			self.cards.append(card)
+	def add_card(self, card_rank=1, count=1):
+		#card_strs = []
+		#for c in self.cards:
+		#	card_strs.append(c.__str__())
+		#if card.__str__() not in card_strs:
+		#	self.cards.append(card)
+		for x in range(count):
+			self.cards.append(Card(0, card_rank))
+		
 # 	def remove_card(self, card):
 # 		card_string = []
 # 		for card in self.cards:
@@ -37,23 +40,22 @@ class Hand():
 	def draw(self, deck):
 		self.add_card(deck.pop_card())
 		
-	def remove_cards(self, card_rank= 1, hand = Hand()):
+	def remove_cards(self, card_rank= 1):
+		self.cards = [x for x in self.cards if x.rank != card_rank]
 		specific_card_count = 0
 		for card in self.cards:
 			if card.rank == card_rank:
 				specific_card_count += 1
-		self.cards = [x for x in self.cards if x.rank != card_rank]
-		for x in range(specific_card_count):
-			hand.cards.append(Card(0, card_rank))		
+		return specific_card_count
 		
-	def remove_pairs(self):
-		ranks = {}
-		for card in self.cards:
-			if card.rank in ranks:
-				ranks[card.rank].append(card)
-			else:
-				ranks[card.rank] = [card]
-		final_cards = []
+# 	def remove_pairs(self):
+# 		ranks = {}
+# 		for card in self.cards:
+# 			if card.rank in ranks:
+# 				ranks[card.rank].append(card)
+# 			else:
+# 				ranks[card.rank] = [card]
+# 		final_cards = []
 		
 
 
@@ -96,6 +98,8 @@ d = Deck()
 print (
 h1 = d.deal()[0]
 h2 = d.deal()[1]
+print(h1.cards)
+h1.remove_card(11)
 	
 
 value_input = input("‘Please choose a card rank you would like to ask the other player if they have (between 1-13):")
