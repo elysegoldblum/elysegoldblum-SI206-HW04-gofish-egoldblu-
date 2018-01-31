@@ -15,46 +15,9 @@ class Card(object):
 
 	def __str__(self):
 		return "{} of {}".format(self.rank,self.suit)
-
-class Deck(object):
-	def __init__(self): 
-		self.cards = []
-		for suit in range(4):
-			for rank in range(1,14):
-				card = Card(suit,rank)
-				self.cards.append(card) 
-
-	def __str__(self):
-		total = []
-		for card in self.cards:
-			total.append(card.__str__())
-		return "\n".join(total)
-
-	def pop_card(self, i=-1):
-		return self.cards.pop(i) 
-	def shuffle(self):
-		random.shuffle(self.cards)
-
-	def sort_cards(self):
-		self.cards = []
-		for suit in range(4):
-			for rank in range(1,14):
-				card = Card(suit,rank)
-				self.cards.append(card)
-				
-	def deal(self, num_hands=2, num_cards=7):
-		
-		h1 = Hand()
-		h2 = Hand()
-		hands = [h1, h2]
-		for hand in range(num_hands):
-			for cycle in range(num_cards):
-				hands[hand].add_card(self.pop_card())
-		return hands
-
-
+	
 class Hand():
-	def __init__(self,init_cards=deck.deal(2,7):
+	def __init__(self,init_cards):
 		self.cards = init_cards
 	def add_card(self, card):
 		card_strs = []
@@ -87,3 +50,38 @@ class Hand():
 				final_cards.append(rank[-1])
 		self.cards = final_cards
 
+
+class Deck(object):
+	def __init__(self): 
+		self.cards = []
+		for suit in range(4):
+			for rank in range(1,14):
+				card = Card(suit,rank)
+				self.cards.append(card) 
+
+	def __str__(self):
+		total = []
+		for card in self.cards:
+			total.append(card.__str__())
+		return "\n".join(total)
+
+	def pop_card(self, i=-1):
+		return self.cards.pop(i) 
+	def shuffle(self):
+		random.shuffle(self.cards)
+
+	def sort_cards(self):
+		self.cards = []
+		for suit in range(4):
+			for rank in range(1,14):
+				card = Card(suit,rank)
+				self.cards.append(card)
+				
+	def deal(self, num_hands=2, num_cards=7):
+		h1 = Hand()
+		h2 = Hand()
+		hands = [h1, h2]
+		for hand in range(num_hands):
+			for cycle in range(num_cards):
+				hands[hand].add_card(self.pop_card())
+		return hands
