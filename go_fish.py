@@ -66,27 +66,58 @@ class Deck(object):
 
 
 class Hand():
-
-    def __init__(self, init_cards):
-        self.cards = init_cards
-
-    def add_card(self, card):
-        card_strs = [] 
-        for c in self.cards: 
-            card_strs.append(c.__str__()) 
-        if card.__str__() not in card_strs: 
-            self.cards.append(card) 
-
-    def remove_card(self, card):
-        x = [c.__str__() for c in self.cards]
-        card_hand = str(card)
-        if card_hand in x:
-            index = x.index(card_hand)
-            del self.cards[index]
-            return card 
-
-    def draw(self, deck):
-        self.add_card(deck.pop_card())
+	def __init__(self,init_cards):
+		self.cards = init_cards
+	def add_card(self, card):
+		card_strs = []
+		for c in self.cards:
+			card_strs.append(c.__str__())
+		if card.__str__() not in card_strs:
+			self.cards.append(card)
+	def remove_card(self, card):
+		card_string = []
+		for card in self.cards:
+			card_string.append(card.__str__())
+		new_card = str(card)
+		if new_card in card_string:
+			place = card_string.index(new_card)
+			del self.cards[place]
+			return card
+	def draw(self, deck):
+		self.add_card(deck.pop_card())
+	class Hand():
+	def __init__(self,init_cards):
+		self.cards = init_cards
+	def add_card(self, card):
+		card_strs = []
+		for c in self.cards:
+			card_strs.append(c.__str__())
+		if card.__str__() not in card_strs:
+			self.cards.append(card)
+	def remove_card(self, card):
+		card_string = []
+		for card in self.cards:
+			card_string.append(card.__str__())
+		new_card = str(card)
+		if new_card in card_string:
+			place = card_string.index(new_card)
+			del self.cards[place]
+			return card
+	def draw(self, deck):
+		self.add_card(deck.pop_card())
+	def remove_pairs(self):
+		ranks = {}
+		for card in self.cards:
+			if card.rank in ranks:
+				ranks[card.rank].append(card)
+			else:
+				ranks[card.rank] = [card]
+		final_cards = []
+		for rank in ranks.values():
+			card_to_remove = len(rank) % 2
+			if card_to_remove == 1:
+				final_cards.append(rank[-1])
+		self.cards = final_cards
  
 class Game():
 	
