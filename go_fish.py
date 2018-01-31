@@ -48,6 +48,21 @@ class Deck(object):
 			for rank in range(1,14):
 				card = Card(suit,rank)
 				self.cards.append(card)
+				
+	def deal(self, num_hands, num_cards):
+		hands = []
+		for hand in range(num_hands):
+			hands.append(Hand([]))
+		if num_cards == -1:
+			card_count = 0
+			while len(self.cards) != 0:
+				hands[card_count % num_hands].add_card(self.pop_card())
+				card_count += 1
+			return hands
+		for cycle in range(num_cards):
+			for hand in hands:
+				hand.add_card(self.pop_card())
+		return hands
 
 
 class Hand():
