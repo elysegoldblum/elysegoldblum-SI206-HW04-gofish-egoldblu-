@@ -85,26 +85,6 @@ class Hand():
 			return card
 	def draw(self, deck):
 		self.add_card(deck.pop_card())
-	class Hand():
-	def __init__(self,init_cards):
-		self.cards = init_cards
-	def add_card(self, card):
-		card_strs = []
-		for c in self.cards:
-			card_strs.append(c.__str__())
-		if card.__str__() not in card_strs:
-			self.cards.append(card)
-	def remove_card(self, card):
-		card_string = []
-		for card in self.cards:
-			card_string.append(card.__str__())
-		new_card = str(card)
-		if new_card in card_string:
-			place = card_string.index(new_card)
-			del self.cards[place]
-			return card
-	def draw(self, deck):
-		self.add_card(deck.pop_card())
 	def remove_pairs(self):
 		ranks = {}
 		for card in self.cards:
