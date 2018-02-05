@@ -88,13 +88,13 @@ while len(d.cards) != 0:
 	if len(h1.cards) == 0:
 		print("Player 2 wins")
 		break
-elif len(h2.cards) == 0:
-	print("Player 1 wins")
-	break
-else:
-	print()
-	print("Hand {}'s turn".format(hand_num))
-	value_input = input("Enter value between 1 and 13 (1=Ace,above 10 are face cards in ascending order): ")
+	elif len(h2.cards) == 0:
+		print("Player 1 wins")
+		break
+	else:
+		print()
+		print("Hand {}'s turn".format(hand_num))
+		value_input = input("Enter value between 1 and 13 (1=Ace,above 10 are face cards in ascending order): ")
 	
 	#Hand 1's turn
 	if hand_num == 1:
