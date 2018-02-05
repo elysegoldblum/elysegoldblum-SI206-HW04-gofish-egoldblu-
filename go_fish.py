@@ -1,5 +1,6 @@
 import random
 
+
 class Card(object):
 	suit_names =  ["Diamonds","Clubs","Hearts","Spades"]
 	rank_levels = [1,2,3,4,5,6,7,8,9,10,11,12,13]
@@ -7,65 +8,37 @@ class Card(object):
 
 	def __init__(self, suit=0,rank=2):
 		self.suit = self.suit_names[suit]
-		if rank in self.faces: 
+		if rank in self.faces:
 			self.rank = self.faces[rank]
 		else:
 			self.rank = rank
-		self.rank_num = rank 
+		self.rank_num = rank
 
 	def __str__(self):
 		return "{} of {}".format(self.rank,self.suit)
-	
+
+
 class Hand():
-	def __init__(self,init_cards):
-		self.cards = init_cards
-	def add_card(self, card_rank=1, count=1):
-		#card_strs = []
-		#for c in self.cards:
-		#	card_strs.append(c.__str__())
-		#if card.__str__() not in card_strs:
-		#	self.cards.append(card)
-		for x in range(count):
-			self.cards.append(Card(0, card_rank))
-		
-# 	def remove_card(self, card):
-# 		card_string = []
-# 		for card in self.cards:
-# 			card_string.append(card.__str__())
-# 		new_card = str(card)
-# 		if new_card in card_string:
-# 			place = card_string.index(new_card)
-# 			del self.cards[place]
-# 			return card
+	def __init__(self, cards=[]):
+		self.cards = cards
+
+	def add_card(self, card):
+		self.cards.append(card)
+
 	def draw(self, deck):
 		self.add_card(deck.pop_card())
-		
-	def remove_cards(self, card_rank= 1):
-		self.cards = [x for x in self.cards if x.rank != card_rank]
-		specific_card_count = 0
-		for card in self.cards:
-			if card.rank == card_rank:
-				specific_card_count += 1
-		return specific_card_count
-		
-# 	def remove_pairs(self):
-# 		ranks = {}
-# 		for card in self.cards:
-# 			if card.rank in ranks:
-# 				ranks[card.rank].append(card)
-# 			else:
-# 				ranks[card.rank] = [card]
-# 		final_cards = []
-		
 
+	def remove_card(self,card):
+
+		self.cards.remove(card)
 
 class Deck(object):
-	def __init__(self): 
+	def __init__(self):
 		self.cards = []
 		for suit in range(4):
 			for rank in range(1,14):
 				card = Card(suit,rank)
-				self.cards.append(card) 
+				self.cards.append(card)
 
 	def __str__(self):
 		total = []
@@ -73,10 +46,21 @@ class Deck(object):
 			total.append(card.__str__())
 		return "\n".join(total)
 
-	def pop_card(self, i=-1):
-		return self.cards.pop(i) 
+	def remove_card(self, card= Card()):
+		self.cards.remove(card)
+
+	def pop_card(self):
+		return self.cards.pop()
+
 	def shuffle(self):
 		random.shuffle(self.cards)
+
+	def replace_card(self, card):
+		card_strs = []
+		for c in self.cards:
+			card_strs.append(c.__str__())
+		if card.__str__() not in card_strs:
+			self.cards.append(card)
 
 	def sort_cards(self):
 		self.cards = []
@@ -84,26 +68,13 @@ class Deck(object):
 			for rank in range(1,14):
 				card = Card(suit,rank)
 				self.cards.append(card)
-				
-	def deal(self, num_hands=2, num_cards=7):
-		h1 = Hand()
-		h2 = Hand()
-		hands = [h1, h2]
-		for hand in range(num_hands):
-			for cycle in range(num_cards):
-				hands[hand].add_card(self.pop_card())
-		return hands
-	
-d = Deck()
-print (
-h1 = d.deal()[0]
-h2 = d.deal()[1]
-print(h1.cards)
-h1.remove_card(11)
-	
 
-value_input = input("‘Please choose a card rank you would like to ask the other player if they have (between 1-13):")
-if value_input  h1.cards:
-	in
-	
+	def deal(self):
+		hand = []
+		for card in self.cards:
+			if len(hand) < 7:
+				x = random.choice(self.cards)
+				hand.append(x)
+				self.remove_card(x)
 
+		return hand
