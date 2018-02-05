@@ -86,8 +86,8 @@ h2 = Hand(cards = d.deal())
 hand_num = 1
 while len(d.cards) != 0:
 	if len(h1.cards) == 0:
-	print("Player 2 wins")
-	break
+		print("Player 2 wins")
+		break
 elif len(h2.cards) == 0:
 	print("Player 1 wins")
 	break
