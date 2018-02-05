@@ -95,3 +95,55 @@ else:
 	print()
 	print("Hand {}'s turn".format(hand_num))
 	value_input = input("Enter value between 1 and 13 (1=Ace,above 10 are face cards in ascending order): ")
+	
+	#Hand 1's turn
+	if hand_num == 1:
+		count = 0
+		#Check to see if input equals a cards rank in hand 2's list of cards.
+		#If yes, remove the card and add it to hand 1.
+		#Update count so player 1 will be able to go again.
+		for x in h2.cards:
+			if int(value_input) == x.rank_num:
+				print(x.rank_num)
+				h2.remove_card(x)
+				h1.add_card(x)
+				count +=1
+
+			#Print the respective hands for each player.
+			#Continue at the end allows for player 1 to go again.
+		if count != 0:
+			print("Hand 1")
+			h1_ranks = []
+			h2_ranks = []
+			for x in h1.cards:
+				h1_ranks.append(x.rank)
+			print(h1_ranks)
+			print()
+
+			print("Hand 2")
+			for x in h2.cards:
+
+				h2_ranks.append(x.rank)
+			print(h2_ranks)
+			hand_num = 1
+			continue
+
+			#Have player 1 draw a card from the deck.
+			#Print respective hands for each player and now it's player 2's turn.
+		else:
+			h1.draw(d)
+
+			print("Hand 1")
+			h1_ranks = []
+			h2_ranks = []
+			for x in h1.cards:
+				h1_ranks.append(x.rank)
+			print(h1_ranks)
+			print()
+
+			print("Hand 2")
+			for x in h2.cards:
+				h2_ranks.append(x.rank)
+			print(h2_ranks)
+
+			hand_num = 2
